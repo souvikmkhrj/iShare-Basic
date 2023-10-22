@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iShare Basic</title>
+    <!-- <link rel="stylesheet" href="../static/style.css"> -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(90deg, #56CCF2, #2F80ED);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 300px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transform: scale(1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        form:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="file"],
+        input[type="password"] {
+            width: 92%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s, transform 0.3s;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        input[type="file"]:focus,
+        input[type="password"]:focus {
+            border-color: #4CAF50;
+            transform: scale(1.02);
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        button {
+            background: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        button:hover {
+            background: #45A049;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <label for="file">File:</label>
+                <input type="file" name="file" id="file" required>
+
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password">
+
+                <button type="submit">iShare</button>
+            </form>
+</body>
+
+</html>

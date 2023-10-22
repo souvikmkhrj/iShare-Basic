@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iShare Basic</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(90deg, #56CCF2, #2F80ED);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 461px;
+            text-align: center;
+            padding: 20px;
+            transform: scale(1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .link {
+            color: #4CAF50;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+        .copy-button {
+            width:30%;
+            background: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px auto;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .copy-button:hover {
+            background: #45A049;
+            transform: scale(1.05);
+        }
+
+        .copied-message {
+            display: none;
+            font-weight: bold;
+            color: #4CAF50;
+            animation: fadeInMessage 1s ease-in-out;
+        }
+
+        @keyframes fadeInMessage {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <% if (locals.fileLink != null) { %>
+            <p class="message">Your File is Uploaded</p>
+            <a class="link" href="<%= locals.fileLink %>"><%= locals.fileLink %></a>
+            <p class="message">Share this link with others</p>
+            <button class="copy-button" id="copyButton" onclick="copyToClipboard('<%= locals.fileLink %>')">Copy Link</button>
+            <p class="copied-message" id="copiedMessage">Link Copied!</p>
+        <% } %>
+    </div>
+
+    <script>
+        function copyToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            const copyButton = document.getElementById('copyButton');
+            const copiedMessage = document.getElementById('copiedMessage');
+            copyButton.style.display = 'none';
+            copiedMessage.style.display = 'block';
+            // copiedMessage.style.justifyContent='center'
+
+
+            setTimeout(function () {
+                copyButton.style.display = 'block';
+                // copyButton.style.justifyContent='center';
+                copiedMessage.style.display = 'none';
+            }, 5000); // Revert button state after 8 seconds
+        }
+    </script>
+</body>
+
+</html>
