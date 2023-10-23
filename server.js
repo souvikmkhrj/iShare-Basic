@@ -1,4 +1,4 @@
-// require('dotenv').config()
+require('dotenv').config()
 
 path=require('path')
 
@@ -9,15 +9,13 @@ const mongoose=require("mongoose")
 const bcrypt=require("bcrypt")
 
 const File = require("./models/file")
-PORT=process.env.PORT || 3000
 const express=require("express")
 const app=express()
 app.use(express.static(path.join(__dirname,"public")))
 app.use(express.urlencoded({extended:true}))
 
 const upload=multer({dest:"uploads"})
-DATABASE_URL="mongodb://127.0.0.1/iShare-Basic"
-mongoose.connect(DATABASE_URL)
+mongoose.connect(process.env.DATABASE_URL)
 
 // app.use('/static', express.static(path.join(__dirname, 'static')));
 
@@ -64,9 +62,5 @@ async function handleDownload(req,res){
     res.download(file.path,file.originalName);
 
 }
-try {
-    app.listen(PORT);
+app.listen(process.env.PORT);
     
-} catch (error) {
-    console.log(error)
-}
