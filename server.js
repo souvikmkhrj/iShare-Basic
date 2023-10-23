@@ -64,4 +64,4 @@ async function handleDownload(req,res){
     res.download(file.path,file.originalName);
 
 }
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 3000 );
